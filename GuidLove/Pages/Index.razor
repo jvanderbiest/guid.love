@@ -1,0 +1,192 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime;
+
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <section id="header" class="wrapper">
+
+        <ul class="actions special">
+            <li><button class="button style1 large" @onclick="eventArgs => { UpdateGuid(true); }">Generate</button></li>
+            <li><button href="#" class="button style3 large" @onclick="Clipboard">Copy</button></li>
+        </ul>
+
+
+        <div style="
+    text-align: center;
+">
+            <textarea class="textarea-style" name="message" id="contact-message" placeholder="" rows="3">@model.CurrentGuid</textarea>
+        </div>
+
+
+        <form method="post">
+            <section id="options">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="cbUppercase" class="css-checkbox" name="cbUppercase" @bind="@model.Uppercase" />
+                        <label for="cbUppercase" class="css-label dark-check-cyan">Uppercase</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="cbBraces" class="css-checkbox" @bind="@model.Braces" />
+                        <label for="cbBraces" class="css-label dark-check-cyan">Braces</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" id="cbHypens" class="css-checkbox" @bind="@model.Hypens" />
+                        <label for="cbHypens" class="css-label dark-check-cyan">Hypens</label>
+                    </li>
+
+                    <li>
+                        <input type="checkbox" id="cbParentheses" class="css-checkbox" @bind="@model.Parantheses" />
+                        <label for="cbParentheses" class="css-label dark-check-cyan">Parentheses</label>
+                    </li>
+
+                    <li>
+
+                        <input type="number" id="guidCount" name="guidCount" min="1" max="10000" @bind="@model.GuidItems" class="guidCountInput">
+                        <label for="guidCount" class="guidCountLabel">Guid(s)</label>
+                    </li>
+                </ul>
+            </section>
+        </form>
+
+
+        <div id="logo">
+            <h1><a href="index.html">Guid.❤️</a></h1>
+        </div>
+
+    </section>
+
+    <!-- Intro -->
+    <section id="intro" class="wrapper style1">
+        <div class="title">Spread the love</div>
+        <div class="container">
+            <p class="style1">So in case you were wondering what this is all about...</p>
+            <p class="style2">
+                Globally Unique Identifiers are widely used in Microsoft products to identify objects
+            </p>
+            <p class="style3">This project is a simple use-case of consuming a .NET Framework assembly (System.Guid) in the browser. The project has been built with <strong><a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor" target="_blank">Blazor</a></strong> and is <a href="https://github.com/jvanderbiest/guid.love" target="_blank">open source</a></p>
+
+        </div>
+    </section>
+
+    <!-- Main -->
+    <section id="main" class="wrapper style2">
+        <div class="title">The Details</div>
+        <div class="container">
+
+            <!-- Image -->
+            <a href="#" class="image featured">
+                <img src="images/pic01.jpg" alt="" />
+            </a>
+
+            <!-- Features -->
+            <section id="features">
+                <header class="style1">
+                    <h2>GUID</h2>
+                    <p>A 128-bit number used to identify information in computer systems</p>
+                </header>
+                <div class="feature-list">
+                    <div class="row">
+                        <div class="col-6 col-12-medium">
+                            <section>
+                                <h3 class="icon solid fa-binoculars">What <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier" target="_blank">wikipedia</a> says</h3>
+                                <p>In its canonical textual representation, the 16 octets of a UUID are represented as 32 hexadecimal (base-16) digits, displayed in 5 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32 alphanumeric characters and 4 hyphens).</p>
+                            </section>
+                        </div>
+                        <div class="col-6 col-12-medium">
+                            <section>
+                                <h3 class="icon solid fa-bong">Guid creation</h3>
+                                <p style="
+    margin-bottom: 5px;
+">According to <a href="http://guid.one/guid" target="_blank">guid.one</a>, there a 5 versions of GUIDs defined in <a href="http://www.ietf.org/rfc/rfc4122.txt" target="_blank">RFC 4122</a>.</p>
+                                <ol style="
+    margin-left: 20px;
+">
+                                    <li>date-time & MAC address</li>
+                                    <li>DCE Security</li>
+                                    <li>MD5 hash & namespace</li>
+                                    <li>random</li>
+                                    <li>SHA-1 hash & namespace</li>
+                                </ol>
+                            </section>
+                        </div>
+                        <div class="col-6 col-12-medium">
+                            <section>
+                                <h3 class="icon solid fa-blind">How many GUIDs</h3>
+                                <p>A GUID is represented by 16 bytes. So there are 2^128 possibilities = 3.4028237e+38 possible GUIDs.</p>
+                            </section>
+                        </div>
+                        <div class="col-6 col-12-medium">
+                            <section>
+                                <h3 class="icon solid fa-check-double">Do I need to worry about duplicates?</h3>
+                                <p>Normally you should not, with the amount of GUIDs available, they are safe to use. If it keeps you awake at night, fallback to a another GUID that minimizes the collision once again...</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </section>
+
+    <!-- Highlights -->
+    <section id="highlights" class="wrapper style3" style="padding-bottom: 10px;">
+        <div class="title">The Endorsements</div>
+        <div class="container">
+            <div class="row aln-center">
+                <div class="col-4 col-12-medium">
+                    <section class="highlight">
+                        <a href="#" class="image featured"><img src="images/microsoft-logo.jpg" alt="" /></a>
+                        <h3><a href="https://www.microsoft.com">The creator</a></h3>
+                        <p>Without this company, the GUID probably never ever existed</p>
+                        <ul class="actions">
+                            <li><a href="https://www.microsoft.com" class="button style1" target="_blank">Learn More</a></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-4 col-12-medium">
+                    <section class="highlight">
+                        <a href="#" class="image featured"><img src="images/blazor-logo.jpg" alt="" /></a>
+                        <h3><a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a></h3>
+                        <p>Blazor is a feature of ASP.NET, the popular web development framework that extends the .NET developer platform with tools and libraries for building web apps.</p>
+                        <ul class="actions">
+                            <li><a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor" target="_blank" class="button style1">Learn More</a></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-4 col-12-medium">
+                    <section class="highlight">
+                        <a href="#" class="image featured"><img src="images/github-logo.jpg" alt="" /></a>
+                        <h3><a href="https://github.com/jvanderbiest" target="_blank">Github</a></h3>
+                        <p>Bow down for Github and the <a href="https://git-scm.com/" target="_blank">Git</a> version control system that makes open source a breeze.</p>
+                        <ul class="actions">
+                            <li><a href="https://github.com/" target="_blank" class="button style1">Learn More</a></li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div id="copyright">
+            <p>&copy; 2020 GUID.love</p>
+        </div>
+    </section>
+</div>
+
+
+@code {
+    public Model model = new Model();
+
+    public void UpdateGuid(bool generateNew)
+    {
+        model.UpdateGuid(generateNew);
+    }
+
+    public async Task Clipboard()
+    {
+        var text =
+            await JSRuntime.InvokeAsync<string>("toClipboard", model.CurrentGuid); 
+    }
+}
